@@ -1,8 +1,7 @@
 package com.melih.core.actions
 
 import android.content.Intent
-
-const val EXTRA_LAUNCH_ID = "extras:detail:launchid"
+import android.net.Uri
 
 /**
  * Navigation actions for navigation between feature activities
@@ -10,7 +9,9 @@ const val EXTRA_LAUNCH_ID = "extras:detail:launchid"
 object Actions {
 
     fun openDetailFor(id: Long) =
-        Intent("action.dashboard.open")
-            .putExtra(EXTRA_LAUNCH_ID, id)
+        Intent().apply {
+            data = Uri.parse("feature://detail/$id")
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        }
 
 }
